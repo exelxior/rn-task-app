@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Button, TextInput } from "react-native";
 
-export default function AddTask() {
+export default function NewTask() {
   const [task, setTask] = useState(""); //
   const textInputDisabled = task === "";
   const onPress = () => {};

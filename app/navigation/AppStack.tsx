@@ -1,10 +1,11 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../screens/Home";
-import AddTask from "../screens/Home/AddTask";
+import NewTask from "../screens/Home/NewTask";
 import { Button } from "react-native";
 import { setSignOut } from "../redux/slices/authSlice";
 import { useReduxDispatch } from "../redux/store";
+import { MainRoutes } from "../types";
 
 const Stack = createNativeStackNavigator();
 
@@ -21,7 +22,7 @@ export const AppStack = () => {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Home"
+        name={MainRoutes.Home}
         component={Home}
         options={{
           headerRight: () => (
@@ -29,7 +30,7 @@ export const AppStack = () => {
           ),
         }}
       />
-      <Stack.Screen name="AddTask" component={AddTask} />
+      <Stack.Screen name={MainRoutes.NewTask} component={NewTask} />
     </Stack.Navigator>
   );
 };
