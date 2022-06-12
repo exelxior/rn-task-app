@@ -1,10 +1,10 @@
 import React from "react";
 import { View, Button } from "react-native";
-import { useDispatch } from "react-redux";
 import { setSignIn } from "../../redux/slices/authSlice";
+import { useReduxDispatch } from "../../redux/store";
 
 export default function SignIn() {
-  const dispatch = useDispatch();
+  const dispatch = useReduxDispatch();
 
   const handleSignOut = () => {
     const user = {

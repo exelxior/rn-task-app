@@ -2,13 +2,13 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../screens/Home";
 import { Button } from "react-native";
-import { useDispatch } from "react-redux";
 import { setSignOut } from "../redux/slices/authSlice";
+import { useReduxDispatch } from "../redux/store";
 
 const Stack = createNativeStackNavigator();
 
 export const AppStack = () => {
-  const dispatch = useDispatch();
+  const dispatch = useReduxDispatch();
 
   const handleSignOut = () => {
     const user = {
