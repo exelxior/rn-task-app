@@ -1,12 +1,12 @@
 import React from "react";
-import { NavigationContainer, useRoute } from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { AppStack } from "./AppStack";
 import { AuthStack } from "./AuthStack";
 import { selectIsLoggedIn } from "../redux/slices/authSlice";
-import { useReduxSelector } from "../redux/store";
+import { useSelector } from "react-redux";
 
 export const AppRoute = () => {
-  const isLoggedIn = useReduxSelector(selectIsLoggedIn);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
     <NavigationContainer>

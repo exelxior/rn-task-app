@@ -1,10 +1,13 @@
-import rootReducer from "./redux/rootReducer";
 import store from "./redux/store";
 
 // data
 export type Task = {
-  id: string | number[];
+  id: ID;
   title: string;
+};
+
+export type ID = {
+  id: string | number[];
 };
 
 // navigation
@@ -18,5 +21,5 @@ export enum MainRoutes {
 }
 
 // redux types
-export type RootState = ReturnType<typeof rootReducer>;
+export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;

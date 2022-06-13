@@ -1,13 +1,17 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../types";
-import rootReducer from "./rootReducer";
+import { useDispatch } from "react-redux";
+import { AppDispatch } from "../types";
+import tasksReducer from "./slices/taskSlice";
+import authReducer from "./slices/authSlice";
 
+const reducer = {
+  tasks: tasksReducer,
+  auth: authReducer,
+};
 const store = configureStore({
-  reducer: rootReducer,
+  reducer,
 });
 
 export const useReduxDispatch = (): AppDispatch => useDispatch<AppDispatch>();
-export const useReduxSelector: TypedUseSelectorHook<RootState> = useSelector;
 
 export default store;

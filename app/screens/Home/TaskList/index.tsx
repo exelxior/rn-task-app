@@ -1,31 +1,28 @@
 import React from "react";
-import { FlatList, ListRenderItem } from "react-native";
+import { FlatList, ListRenderItem, TouchableOpacity } from "react-native";
+import { useSelector } from "react-redux";
+import { completeTask, selectTasks } from "../../../redux/slices/taskSlice";
+import { useReduxDispatch } from "../../../redux/store";
 import { Task } from "../../../types";
 import TaskItem from "../TaskItem";
 
 const TaskList = () => {
-  const DATA = [
-    {
-      id: "bd7acbea-c1b1-46c2-aed5-3ad53abb28ba",
-      title: "Cleaning House",
-    },
-    {
-      id: "3ac68afc-c605-48d3-a4f8-fbd91aa97f63",
-      title: "Cooking Dinner",
-    },
-    {
-      id: "58694a0f-3da1-471f-bd96-145571e29d72",
-      title: "Buying Plants",
-    },
-  ];
+  const dispatch = useReduxDispatch();
+  const tasks = useSelector(selectTasks);
+  console.log(tasks);
 
   const renderItem: ListRenderItem<Task> = ({ item }) => (
-    <TaskItem item={item} />
+    <TouchableOpacity
+      key={item.id}
+      onPress={() => dispatch(completeTask(item.id))}
+    >
+      <TaskItem item={item} />
+    </TouchableOpacity>
   );
 
   return (
     <FlatList
-      data={DATA}
+      data={tasks}
       renderItem={renderItem}
       keyExtractor={(item: Task) => item.id}
     />
