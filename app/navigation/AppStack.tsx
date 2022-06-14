@@ -15,7 +15,11 @@ export const AppStack = () => {
         component={Home}
         options={{ header: NavHeader }}
       />
-      <Stack.Screen name={MainRoutes.NewTask} component={NewTask} />
+      <Stack.Screen
+        name={MainRoutes.NewTask}
+        component={NewTask}
+        options={{ headerTitle: "To go back", headerTintColor: "#1294F2" }}
+      />
     </Stack.Navigator>
   );
 };
