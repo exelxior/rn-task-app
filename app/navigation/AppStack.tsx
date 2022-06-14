@@ -2,33 +2,18 @@ import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Home from "../screens/Home";
 import NewTask from "../screens/Home/NewTask";
-import { Button } from "react-native";
-import { setSignOut } from "../redux/slices/authSlice";
-import { useReduxDispatch } from "../redux/store";
 import { MainRoutes } from "../types";
+import NavHeader from "../components/NavHeader";
 
 const Stack = createNativeStackNavigator();
 
 export const AppStack = () => {
-  const dispatch = useReduxDispatch();
-
-  const handleSignOut = () => {
-    const user = {
-      isLoggedIn: false,
-    };
-    dispatch(setSignOut(user));
-  };
-
   return (
     <Stack.Navigator>
       <Stack.Screen
         name={MainRoutes.Home}
         component={Home}
-        options={{
-          headerRight: () => (
-            <Button onPress={handleSignOut} title="Sign Out" />
-          ),
-        }}
+        options={{ header: NavHeader }}
       />
       <Stack.Screen name={MainRoutes.NewTask} component={NewTask} />
     </Stack.Navigator>

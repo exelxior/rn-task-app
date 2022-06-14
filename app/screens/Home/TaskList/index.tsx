@@ -1,31 +1,27 @@
 import React from "react";
-import { FlatList, ListRenderItem, TouchableOpacity } from "react-native";
+import { FlatList, ListRenderItem, View } from "react-native";
 import { useSelector } from "react-redux";
-import { completeTask, selectTasks } from "../../../redux/slices/taskSlice";
-import { useReduxDispatch } from "../../../redux/store";
+import { selectTasks } from "../../../redux/slices/taskSlice";
 import { Task } from "../../../types";
 import TaskItem from "../TaskItem";
+import styles from "./styles";
 
 const TaskList = () => {
-  const dispatch = useReduxDispatch();
   const tasks = useSelector(selectTasks);
   console.log(tasks);
 
   const renderItem: ListRenderItem<Task> = ({ item }) => (
-    <TouchableOpacity
-      key={item.id}
-      onPress={() => dispatch(completeTask(item.id))}
-    >
-      <TaskItem item={item} />
-    </TouchableOpacity>
+    <TaskItem item={item} />
   );
 
   return (
-    <FlatList
-      data={tasks}
-      renderItem={renderItem}
-      keyExtractor={(item: Task) => item.id}
-    />
+    <View style={styles.taskList}>
+      <FlatList
+        data={tasks}
+        renderItem={renderItem}
+        keyExtractor={(item: Task) => item.id}
+      />
+    </View>
   );
 };
 
