@@ -4,6 +4,8 @@ import store from "./redux/store";
 export type Task = {
   id: ID;
   title: string;
+  category: string;
+  isCompleted: boolean;
 };
 
 export type ID = {
