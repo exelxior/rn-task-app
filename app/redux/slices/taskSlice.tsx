@@ -8,8 +8,14 @@ export const taskSlice = createSlice({
   name: "userTask",
   initialState: { tasks },
   reducers: {
-    newTask: (state, action: PayloadAction<string>) => {
-      const newTaskItem = { id: uuid.v4(), title: action.payload };
+    // TODO: find type of action here
+    newTask: (state, action) => {
+      const newTaskItem = {
+        id: uuid.v4(),
+        title: action.payload.title,
+        category: action.payload.category,
+        isCompleted: false,
+      };
       state.tasks.push(newTaskItem);
     },
     completeTask: (state, action: PayloadAction<ID>) => {

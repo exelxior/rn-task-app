@@ -6,7 +6,6 @@ import { Task } from "../../../types";
 import styles from "./styles";
 
 const TaskItem = ({ item }: { item: Task }) => {
-  //console.log(task);
   const [isSelected, setSelection] = useState(false);
   const dispatch = useReduxDispatch();
 
@@ -20,7 +19,7 @@ const TaskItem = ({ item }: { item: Task }) => {
       <CheckBox value={isSelected} onValueChange={onChecked} />
       <View style={styles.taskItem}>
         <Text style={styles.taskTitle}>{item.title}</Text>
-        <Text style={styles.taskCategory}>Category</Text>
+        <Text style={styles.taskCategory}>{item.category}</Text>
       </View>
     </View>
   );
