@@ -5,11 +5,18 @@ import moment from "moment";
 import { useReduxDispatch } from "../../redux/store";
 import { setSignOut } from "../../redux/slices/authSlice";
 import { Feather } from "@expo/vector-icons";
+import { Task } from "../../types";
+import { selectTasks } from "../../redux/slices/taskSlice";
+import { useSelector } from "react-redux";
 
 const NavHeader = () => {
   const dispatch = useReduxDispatch();
   const today = new Date();
   const date = moment(today).format("M D, YYYY");
+
+  const tasks = useSelector(selectTasks);
+  const completedTasks = tasks.filter((item: Task) => item.isCompleted);
+  const incompleteTasks = tasks.filter((item: Task) => !item.isCompleted);
 
   const handleSignOut = () => {
     const user = {
@@ -27,7 +34,9 @@ const NavHeader = () => {
             <Feather name="chevron-down" size={24} color="black" />
           </TouchableOpacity>
         </View>
-        <Text style={styles.taskSummary}>5 incomplete, 5 complete</Text>
+        <Text style={styles.taskSummary}>
+          {incompleteTasks.length} incomplete, {completedTasks.length} completed
+        </Text>
       </View>
       <TouchableOpacity style={styles.rightBlock} onPress={handleSignOut}>
         <Image

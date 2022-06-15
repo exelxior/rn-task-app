@@ -19,15 +19,16 @@ export const taskSlice = createSlice({
       state.tasks.push(newTaskItem);
     },
     completeTask: (state, action: PayloadAction<ID>) => {
-      const newTasks = state.tasks.filter(
-        (item: Task) => item.id !== action.payload
-      );
-      console.log(newTasks);
-      state.tasks = newTasks;
+      const task = state.tasks.find((t: Task) => t.id === action.payload);
+      task.isCompleted = true;
+    },
+    restoreTask: (state, action: PayloadAction<ID>) => {
+      const task = state.tasks.find((t: Task) => t.id === action.payload);
+      task.isCompleted = false;
     },
   },
 });
 
-export const { newTask, completeTask } = taskSlice.actions;
+export const { newTask, completeTask, restoreTask } = taskSlice.actions;
 export const selectTasks = (state: RootState["tasks"]) => state.tasks.tasks;
 export default taskSlice.reducer;

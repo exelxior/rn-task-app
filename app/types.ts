@@ -8,6 +8,10 @@ export type Task = {
   isCompleted: boolean;
 };
 
+export type tasksProp = {
+  tasks: Task[];
+};
+
 export type ID = {
   id: string | number[];
 };

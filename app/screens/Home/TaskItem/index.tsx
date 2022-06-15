@@ -1,22 +1,25 @@
 import React, { useState } from "react";
-import { Text, View, CheckBox } from "react-native";
-import { completeTask } from "../../../redux/slices/taskSlice";
+import { Text, View } from "react-native";
+import { completeTask, restoreTask } from "../../../redux/slices/taskSlice";
 import { useReduxDispatch } from "../../../redux/store";
 import { Task } from "../../../types";
 import styles from "./styles";
+import Checkbox from "expo-checkbox";
 
 const TaskItem = ({ item }: { item: Task }) => {
-  const [isSelected, setSelection] = useState(false);
   const dispatch = useReduxDispatch();
 
   const onChecked = () => {
-    setSelection;
-    dispatch(completeTask(item.id));
+    if (item.isCompleted) {
+      dispatch(restoreTask(item.id));
+    } else {
+      dispatch(completeTask(item.id));
+    }
   };
 
   return (
     <View style={styles.taskContainer}>
-      <CheckBox value={isSelected} onValueChange={onChecked} />
+      <Checkbox value={item.isCompleted} onValueChange={onChecked} />
       <View style={styles.taskItem}>
         <Text style={styles.taskTitle}>{item.title}</Text>
         <Text style={styles.taskCategory}>{item.category}</Text>
